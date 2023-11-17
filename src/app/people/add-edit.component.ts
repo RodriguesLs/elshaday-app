@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { PersonService, AlertService } from '@app/_services';
+import { PersonService, AlertService, CepService } from '@app/_services';
 
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
@@ -19,6 +19,7 @@ export class AddEditComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private personService: PersonService,
+        private cepService: CepService,
         private alertService: AlertService
     ) { }
 
@@ -31,7 +32,12 @@ export class AddEditComponent implements OnInit {
             nickname: ['', Validators.required],
             role: ['', Validators.required],
             personType: ['', Validators.required],
-            address: ['', Validators.required],
+            address: this.formBuilder.group({
+                postalCode: ['', Validators.required],
+                street: ['', Validators.required],
+                neighborhood: ['', Validators.required],
+                state: ['', Validators.required]
+             }),
             document: ['', Validators.required]
         });
 
@@ -52,19 +58,43 @@ export class AddEditComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.form.controls; }
 
+    get addressF() {
+        return (this.form.get('address') as FormGroup).controls;
+    }
+
+    getCep() {
+        this.cepService.getAddresByCep(this.form.value.address.postalCode)
+            .subscribe({
+                next: (resp) => {
+                    this.form.patchValue({
+                        address: {
+                            postalCode: resp.cep,
+                            street: resp.logradouro,
+                            neighborhood: resp.bairro,
+                            state: resp.uf
+                        }
+                    });
+                },
+                error: error => {
+                    console.log(error);
+                }
+            });
+
+    }
+
     onSubmit() {
         this.submitted = true;
 
         // reset alerts on submit
         this.alertService.clear();
         // stop here if form is invalid
+
         if (this.form.invalid) {
             return;
         }
 
         this.submitting = true;
         this.saveUser()
-            .pipe(first())
             .subscribe({
                 next: () => {
                     this.alertService.success('Cadastrado com sucesso!', { keepAfterRouteChange: true });

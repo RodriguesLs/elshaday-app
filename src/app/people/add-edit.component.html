@@ -62,12 +62,35 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="mb-3 col">
-            <label class="form-label">Endereço</label>
-            <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
-            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-                <div *ngIf="f.address.errors.required">Address is required</div>
+    <div formGroupName="address">
+        <div class="row">
+            <div class="mb-3 col">
+                <label class="form-label">Cep</label>
+                <input type="text" (change)="getCep()" formControlName="postalCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && addressF.postalCode.errors }"/>
+                <div *ngIf="submitted && addressF.postalCode.errors" class="invalid-feedback">
+                    <div *ngIf="addressF.postalCode.errors.required">Cep is required</div>
+                </div>
+            </div>
+            <div class="mb-3 col">
+                <label class="form-label">Logradouro</label>
+                <input type="text" formControlName="street" class="form-control" />
+                <!-- <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                    <div *ngIf="f.address.errors.required">Address is required</div>
+                </div> -->
+            </div>
+            <div class="mb-3 col">
+                <label class="form-label">Bairro</label>
+                <input type="text" formControlName="neighborhood" class="form-control" />
+                <!-- <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                    <div *ngIf="f.address.errors.required">Address is required</div>
+                </div> -->
+            </div>
+            <div class="mb-3 col">
+                <label class="form-label">Estado</label>
+                <input type="text" formControlName="state" class="form-control" />
+                <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                    <div *ngIf="f.address.errors.required">Address is required</div>
+                </div>
             </div>
         </div>
     </div>

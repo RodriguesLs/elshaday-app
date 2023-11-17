@@ -2,3 +2,4 @@
 export * from './user';
 export * from './person';
 export * from './department';
+export * from './cep';

@@ -61,7 +61,6 @@ export class AddEditComponent implements OnInit {
         this.alertService.clear();
 
         // stop here if form is invalid
-        debugger;
         if (this.form.invalid) {
             return;
         }
