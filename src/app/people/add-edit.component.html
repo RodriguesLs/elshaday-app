@@ -1,0 +1,84 @@
+﻿<h1>{{title}}</h1>
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="mb-3 col">
+            <label class="form-label">Nome</label>
+            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">First Name is required</div>
+            </div>
+        </div>
+        <div class="mb-3 col">
+            <label class="form-label">Apelido</label>
+            <input type="text" formControlName="nickname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nickname.errors }" />
+            <div *ngIf="submitted && f.nickname.errors" class="invalid-feedback">
+                <div *ngIf="f.nickname.errors.required">Last Name is required</div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="mb-3 col">
+            <label class="form-label">Documento</label>
+            <input type="text" formControlName="document" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.document.errors }" />
+            <div *ngIf="submitted && f.document.errors" class="invalid-feedback">
+                <div *ngIf="f.document.errors.required">Document is required</div>
+            </div>
+        </div>
+        <div class="mb-3 col">
+            <label class="form-label">Perfil</label>
+            <!-- <div class="input-field col s12">
+                <select>
+                  <option value="" disabled selected>Choose your option</option>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+            </div> -->
+            <select formControlName="role" class="form-select" aria-label="Default select example">
+                <!-- <option selected>Selecione um perfil...</option> -->
+                <option value="0">Cliente</option>
+                <option value="1">Fornecedor</option>
+                <option value="2">Colaborador</option>
+            </select>
+            <!-- <input type="text" formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }" /> -->
+            <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                <div *ngIf="f.role.errors.required">Role is required</div>
+            </div>
+        </div>
+        <div class="mb-3 col">
+            <label class="form-label"></label>
+            <div class="form-check">
+                <input formControlName="personType" value="0" class="form-check-input" type="radio" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Pessoa Física
+                </label>
+            </div>
+            <div class="form-check">
+                <input formControlName="personType" value="1" class="form-check-input" type="radio" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Pessoa Jurídica
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col">
+            <label class="form-label">Endereço</label>
+            <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                <div *ngIf="f.address.errors.required">Address is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <button [disabled]="submitting" class="btn btn-primary">
+            <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+            Save
+        </button>
+        <a routerLink="/people" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+<div *ngIf="loading" class="text-center m-5">
+    <span class="spinner-border spinner-border-lg align-center"></span>
+</div>
