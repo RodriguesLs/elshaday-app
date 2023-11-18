@@ -69,8 +69,8 @@ export class AccountService {
             }));
     }
 
-    delete(id: string) {
-        return this.http.delete(`${environment.apiUrl}/users/${id}`)
+    inactiveUser(id: string) {
+        return this.http.put(`${environment.apiUrl}/api/users/${id}`, {})
             .pipe(map(x => {
                 // auto logout if the logged in user deleted their own record
                 if (id == this.userValue?.id) {

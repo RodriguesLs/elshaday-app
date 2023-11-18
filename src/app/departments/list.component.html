@@ -11,7 +11,7 @@
     <tbody>
         <tr *ngFor="let department of departments">
             <td>{{department.name}}</td>
-            <td>{{department.responsible}}</td>
+            <td>{{department.personName}}</td>
             <!-- <td style="white-space: nowrap">
                 <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary me-1">Edit</a>
                 <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
