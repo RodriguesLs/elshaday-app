@@ -6,6 +6,8 @@ import { UsersRoutingModule } from './users-routing.module';
 import { LayoutComponent } from './layout.component';
 import { ListComponent } from './list.component';
 import { AddEditComponent } from './add-edit.component';
+import { ForgotPassword } from './forgot-password.component';
+import { ChangePassword } from './change-password.component';
 
 @NgModule({
     imports: [
@@ -16,7 +18,9 @@ import { AddEditComponent } from './add-edit.component';
     declarations: [
         LayoutComponent,
         ListComponent,
-        AddEditComponent
+        AddEditComponent,
+        ForgotPassword,
+        ChangePassword
     ]
 })
 export class UsersModule { }

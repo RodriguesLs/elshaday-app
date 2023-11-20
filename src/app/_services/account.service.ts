@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { User } from '@app/_models';
+import { RecoveryPassword, User, ChangePassword } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -42,7 +42,7 @@ export class AccountService {
     }
 
     register(user: User) {
-        return this.http.post(`${environment.apiUrl}/api/users`, user);
+        return this.http.post(`${environment.apiUrl}/api/users`, { ...user, active: true });
     }
 
     getAll() {
@@ -78,5 +78,13 @@ export class AccountService {
                 }
                 return x;
             }));
+    }
+
+    recoveryPassword(email: RecoveryPassword) {
+        return this.http.post(`${environment.apiUrl}/api/users/reset-password`, email);
+    }
+    
+    changePassword(params: ChangePassword) {
+        return this.http.put(`${environment.apiUrl}/api/users/change-password`, params);
     }
 }
