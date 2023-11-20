@@ -29,7 +29,7 @@ export class AddEditComponent implements OnInit {
         // form with validation rules
         this.form = this.formBuilder.group({
             name: ['', Validators.required],
-            nickname: ['', Validators.required],
+            nickname: [],
             role: ['', Validators.required],
             personType: ['', Validators.required],
             address: this.formBuilder.group({
@@ -63,6 +63,7 @@ export class AddEditComponent implements OnInit {
     }
 
     getCep() {
+        debugger;
         this.cepService.getAddresByCep(this.form.value.address.postalCode)
             .subscribe({
                 next: (resp) => {
@@ -94,7 +95,11 @@ export class AddEditComponent implements OnInit {
         }
 
         this.submitting = true;
-        this.saveUser()
+
+        const formattedForm = this.form.value;
+        formattedForm.addresses = [this.form.value.address];
+
+        this.personService.register(formattedForm)
             .subscribe({
                 next: () => {
                     this.alertService.success('Cadastrado com sucesso!', { keepAfterRouteChange: true });
@@ -105,12 +110,5 @@ export class AddEditComponent implements OnInit {
                     this.submitting = false;
                 }
             })
-    }
-
-    private saveUser() {
-        // create or update user based on id param
-        return this.id
-            ? this.personService.update(this.id!, this.form.value)
-            : this.personService.register(this.form.value);
     }
 }

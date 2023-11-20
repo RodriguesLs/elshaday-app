@@ -10,11 +10,14 @@
         </div>
         <div class="mb-3 col">
             <label class="form-label">Perfil</label>
-            <select formControlName="role" class="form-select" aria-label="Default select example">
+            <select formControlName="role" class="form-select" aria-label="Default select example" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
                 <!-- <option selected>Selecione um perfil...</option> -->
                 <option value="0">Admin</option>
                 <option value="1">User</option>
             </select>
+            <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+                <div *ngIf="f.role.errors.required">Perfil é obrigatório.</div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -26,14 +29,11 @@
             </div>
         </div>
         <div class="mb-3 col">
-            <label class="form-label">
-                Password
-                <em *ngIf="id">(Leave blank to keep the same password)</em>
-            </label>
+            <label class="form-label">Senha</label>
             <input type="password" formControlName="passwordHash" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.passwordHash.errors }" />
             <div *ngIf="submitted && f.passwordHash.errors" class="invalid-feedback">
-                <div *ngIf="f.passwordHash.errors.required">Password is required</div>
-                <div *ngIf="f.passwordHash.errors.minlength">Password must be at least 6 characters</div>
+                <div *ngIf="f.passwordHash.errors.required">Senha é obrigatória</div>
+                <div *ngIf="f.passwordHash.errors.minlength">A senha deve ter pelo menos 6 caracteres.</div>
             </div>
         </div>
     </div>

@@ -5,14 +5,17 @@
             <label class="form-label">Nome do departamento</label>
             <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                <div *ngIf="f.name.errors.required">First Name is required</div>
+                <div *ngIf="f.name.errors.required">Nome do departamento é obrigatório</div>
             </div>
         </div>
         <div class="mb-3 col">
             <label class="form-label">Responsável</label>
-            <select formControlName="personId" class="form-select" aria-label="Default select example">
+            <select formControlName="personId" class="form-select" aria-label="Default select example" [ngClass]="{ 'is-invalid': submitted && f.personId.errors }">
                 <option *ngFor="let responsible of responsibles" [value]="responsible.id">{{responsible.name}}</option>
             </select>
+            <div *ngIf="submitted && f.personId.errors" class="invalid-feedback">
+                <div *ngIf="f.personId.errors.required">Responsável é obrigatório</div>
+            </div>
         </div>
     </div>
     <div class="mb-3">

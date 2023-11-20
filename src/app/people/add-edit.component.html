@@ -1,49 +1,38 @@
 ﻿<h1>{{title}}</h1>
+
 <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="row">
         <div class="mb-3 col">
             <label class="form-label">Nome</label>
             <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                <div *ngIf="f.name.errors.required">First Name is required</div>
+                <div *ngIf="f.name.errors.required">Nome é obrigatório</div>
             </div>
         </div>
         <div class="mb-3 col">
             <label class="form-label">Apelido</label>
-            <input type="text" formControlName="nickname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nickname.errors }" />
-            <div *ngIf="submitted && f.nickname.errors" class="invalid-feedback">
-                <div *ngIf="f.nickname.errors.required">Last Name is required</div>
-            </div>
+            <input type="text" formControlName="nickname" class="form-control" />
         </div>
-        
     </div>
     <div class="row">
         <div class="mb-3 col">
             <label class="form-label">Documento</label>
             <input type="text" formControlName="document" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.document.errors }" />
             <div *ngIf="submitted && f.document.errors" class="invalid-feedback">
-                <div *ngIf="f.document.errors.required">Document is required</div>
+                <div *ngIf="f.document.errors.required">Documento é obrigatório</div>
             </div>
         </div>
         <div class="mb-3 col">
             <label class="form-label">Perfil</label>
-            <!-- <div class="input-field col s12">
-                <select>
-                  <option value="" disabled selected>Choose your option</option>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                </select>
-            </div> -->
-            <select formControlName="role" class="form-select" aria-label="Default select example">
+            <select formControlName="role" class="form-select" [ngClass]="{ 'is-invalid': submitted && f.role.errors }" aria-label="Default select example">
                 <!-- <option selected>Selecione um perfil...</option> -->
                 <option value="0">Cliente</option>
                 <option value="1">Fornecedor</option>
                 <option value="2">Colaborador</option>
             </select>
-            <!-- <input type="text" formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.role.errors }" /> -->
+            <!-- <input type="text" formControlName="role" class="form-control"  /> -->
             <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
-                <div *ngIf="f.role.errors.required">Role is required</div>
+                <div *ngIf="f.role.errors.required">Perfil é obrigatório</div>
             </div>
         </div>
         <div class="mb-3 col">
@@ -68,7 +57,7 @@
                 <label class="form-label">Cep</label>
                 <input type="text" (change)="getCep()" formControlName="postalCode" class="form-control" [ngClass]="{ 'is-invalid': submitted && addressF.postalCode.errors }"/>
                 <div *ngIf="submitted && addressF.postalCode.errors" class="invalid-feedback">
-                    <div *ngIf="addressF.postalCode.errors.required">Cep is required</div>
+                    <div *ngIf="addressF.postalCode.errors.required">Cep é obrigatório</div>
                 </div>
             </div>
             <div class="mb-3 col">
@@ -88,18 +77,19 @@
             <div class="mb-3 col">
                 <label class="form-label">Estado</label>
                 <input type="text" formControlName="state" class="form-control" />
-                <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                <!-- <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
                     <div *ngIf="f.address.errors.required">Address is required</div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
+    <p>*Após digitar o CEP, mude de campo e espere um pouco, os outros campos serão preenchidos automaticamente.</p>
     <div class="mb-3">
         <button [disabled]="submitting" class="btn btn-primary">
             <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
-            Save
+            Cadastrar
         </button>
-        <a routerLink="/people" class="btn btn-link">Cancel</a>
+        <a routerLink="/people" class="btn btn-link">Voltar</a>
     </div>
 </form>
 <div *ngIf="loading" class="text-center m-5">

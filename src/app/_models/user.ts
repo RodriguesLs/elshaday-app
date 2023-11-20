@@ -5,4 +5,5 @@
     firstName?: string;
     role?: number;
     token?: string;
+    email?: string;
 }

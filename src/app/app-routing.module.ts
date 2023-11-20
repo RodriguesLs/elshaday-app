@@ -11,10 +11,10 @@ const departmentsModule = () => import('./departments/departments.module').then(
 
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
+    { path: 'users', loadChildren: usersModule },
     { path: 'account', loadChildren: accountModule },
-    { path: 'people', loadChildren: peopleModule },
-    { path: 'departments', loadChildren: departmentsModule },
+    { path: 'people', loadChildren: peopleModule, canActivate: [AuthGuard] },
+    { path: 'departments', loadChildren: departmentsModule, canActivate: [AuthGuard] },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

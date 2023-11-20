@@ -1,11 +1,14 @@
 ﻿<!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark px-3" *ngIf="user">
+<nav class="navbar navbar-expand justify-content-between navbar-dark bg-dark px-3" *ngIf="user">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
         <a *ngIf="user?.role == 0" class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Usuários</a>
         <a class="nav-item nav-link" routerLink="/people" routerLinkActive="active">Pessoas</a>
         <a class="nav-item nav-link" routerLink="/departments" routerLinkActive="active">Departamentos</a>
-        <button class="btn btn-link nav-item nav-link" (click)="logout()">Logout</button>
+    </div>
+    <div class="navbar-nav">
+        <button class="btn btn-link nav-item nav-link" [routerLink]="['/users/change-password']">Alterar senha</button>
+        <button class="btn btn-link nav-item nav-link" (click)="logout()">Sair</button>
     </div>
 </nav>
 

@@ -3,24 +3,26 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th style="width: 30%">Nome</th>
-            <th style="width: 30%">Apelido</th>
-            <th style="width: 30%">Perfil</th>
-            <th style="width: 10%"></th>
+            <th style="width: 25%">Nome</th>
+            <th style="width: 25%">Documento</th>
+            <th style="width: 25%">Perfil</th>
+            <th style="width: 25%">Tipo</th>
+            <!-- <th style="width: 10%"></th> -->
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let person of people">
             <td>{{person.name}}</td>
-            <td>{{person.nickname}}</td>
+            <td>{{person.document}}</td>
             <td>{{person.role == 0 ? 'Cliente' : person.role === 1 ? 'Fornecedor' : 'Colaborador'}}</td>
-            <td style="white-space: nowrap">
+            <td>{{person.type == 0 ? 'Pessoa Física' : 'Pessoa Jurídica'}}</td>
+            <!-- <td style="white-space: nowrap">
                 <a routerLink="edit/{{person.id}}" class="btn btn-sm btn-primary me-1">Editar</a>
                 <button (click)="deletePerson(person.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="person.isDeleting">
                     <span *ngIf="person.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!person.isDeleting">Apagar</span>
                 </button>
-            </td>
+            </td> -->
         </tr>
         <tr *ngIf="!people">
             <td colspan="4" class="text-center">
